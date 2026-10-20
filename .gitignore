@@ -1,0 +1,16 @@
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Dependencies
+node_modules/
+
+# Frontend production build
+client/dist/
+
+# Uploaded files
+server/uploads/
+
+# Logs
+npm-debug.log*

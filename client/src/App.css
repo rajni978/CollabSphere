@@ -1,0 +1,212 @@
+
+/* Reset default browser spacing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  
+}
+
+body {
+  font-family: Inter, Arial, sans-serif;
+  background: #f4f5fb;
+  color: #202036;
+}
+
+/* Full-page layout */
+.auth-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 24px;
+  background: linear-gradient(135deg, #f4f5fb, #e9e7ff);
+}
+
+/* Authentication card */
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+  padding: 36px;
+  background: #ffffff;
+  border: 1px solid #e8e7f2;
+  border-radius: 20px;
+  box-shadow: 0 15px 45px rgba(40, 35, 90, 0.1);
+}
+
+/* Brand */
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.brand-icon {
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #6254e8;
+  color: white;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.brand h1 {
+  font-size: 26px;
+  letter-spacing: -0.8px;
+}
+
+.subtitle {
+  margin-bottom: 28px;
+  color: #77768b;
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Login and Register tabs */
+.auth-tabs {
+  display: flex;
+  gap: 6px;
+  padding: 5px;
+  margin-bottom: 28px;
+  border-radius: 10px;
+  background: #f1f0f8;
+}
+
+.auth-tabs button {
+  flex: 1;
+  padding: 11px;
+  border: none;
+  border-radius: 7px;
+  background: transparent;
+  color: #77768b;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.auth-tabs button.active {
+  background: white;
+  color: #6254e8;
+  box-shadow: 0 2px 8px rgba(40, 35, 90, 0.08);
+}
+
+/* Form headings */
+.auth-card h2 {
+  margin-bottom: 8px;
+  font-size: 24px;
+  letter-spacing: -0.5px;
+}
+
+.form-description {
+  margin-bottom: 24px;
+  color: #77768b;
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+/* Form fields */
+.form-group {
+  margin-bottom: 19px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid #dedde9;
+  border-radius: 9px;
+  outline: none;
+  background: white;
+  color: #202036;
+  font-size: 14px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input::placeholder {
+  color: #aaa9b8;
+}
+
+.form-group input:focus {
+  border-color: #6254e8;
+  box-shadow: 0 0 0 3px rgba(98, 84, 232, 0.12);
+}
+
+/* Submit button */
+.submit-btn {
+  width: 100%;
+  margin-top: 5px;
+  padding: 14px;
+  border: none;
+  border-radius: 9px;
+  background: #6254e8;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #5042d0;
+  transform: translateY(-1px);
+}
+
+.submit-btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.65;
+}
+
+/* Success and error messages */
+.status-message {
+  margin-top: 18px;
+  padding: 12px;
+  border-radius: 8px;
+  background: #f0efff;
+  color: #5042d0;
+  font-size: 14px;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+/* Footer */
+.footer-text {
+  margin-top: 26px;
+  color: #9695a7;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Responsive layout for mobile screens */
+@media (max-width: 480px) {
+  .auth-page {
+    padding: 16px;
+  }
+
+  .auth-card {
+    padding: 25px 20px;
+    border-radius: 16px;
+  }
+
+  .brand h1 {
+    font-size: 23px;
+  }
+
+  .auth-card h2 {
+    font-size: 21px;
+  }
+}
+
