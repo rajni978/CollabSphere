@@ -8,7 +8,7 @@ import {
   deleteNote,
 } from "../controllers/noteController.js";
 
-import authMiddleware from "../middleware/authMiddleware.js";
+import authMiddleware from "../../../middleware/authMiddleware.js";
 
 const router = Router();
 

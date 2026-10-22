@@ -1,6 +1,6 @@
 
 import { Router } from "express";
-import authMiddleware from "../middleware/authMiddleware.js";
+import authMiddleware from "../../../middleware/authMiddleware.js";
 import {
   explainNote,
   improveNote,

@@ -8,12 +8,30 @@ function Dashboard({onLogout}) {
 
   const [showProjectForm, setShowProjectForm] = useState(false);
   const [projectName, setProjectName] = useState("");
+  const [notesCount, setNotesCount] = useState(0);
   const [projectDescription, setProjectDescription] = useState("");
   const [projects, setProjects] = useState([]);
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
-   const [searchTerm, setSearchTerm] = useState("");
-   const [isFetchingProjects, setIsFetchingProjects] = useState(true);
+  const [isFetchingProjects, setIsFetchingProjects] = useState(true);
+
+  const [activities, setActivities] = useState([]);
+const [isFetchingActivities, setIsFetchingActivities] = useState(false);
+
+  const userId = localStorage.getItem("userId");
+
+const ownedProjects = projects.filter(
+  (project) =>
+    String(project.owner?._id || project.owner) === userId
+);
+
+const collaboratorCount = new Set(
+  ownedProjects.flatMap((project) =>
+    (project.members || []).map((member) =>
+      String(member?._id || member)
+    )
+  )
+).size;
 
   // Fetch the logged-in user's projects
   useEffect(() => {
@@ -63,6 +81,93 @@ function Dashboard({onLogout}) {
 
     fetchProjects();
   }, [navigate]);
+
+  useEffect(() => {
+  const fetchNotesCount = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      const response = await fetch(
+        "http://localhost:5000/api/projects/notes-count",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(
+          data.message || "Failed to fetch notes count."
+        );
+      }
+
+      setNotesCount(data.count);
+    } catch (error) {
+      console.error("Fetch notes count error:", error);
+    }
+  };
+
+  fetchNotesCount();
+}, []);
+
+useEffect(() => {
+
+  const fetchActivities = async() => {
+
+    const token = localStorage.getItem("token");
+
+    if(!token || projects.length ===0){
+      setActivities([]);
+      setIsFetchingActivities(false);
+      return;
+    }
+
+    setIsFetchingActivities(true);
+
+
+    try {
+      const results = await Promise.all(
+        projects.map(async (project) => {
+          const response = await fetch(
+            `http://localhost:5000/api/projects/${project._id}/activities`,
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            }
+          );
+
+          if (!response.ok) {
+            throw new Error("Failed to fetch project activity.");
+          }
+
+          const data = await response.json();
+          return data.activities || [];
+        })
+      );
+
+      const allActivities = results.flat();
+
+      allActivities.sort(
+        (a, b) =>
+          new Date(b.createdAt).getTime() -
+          new Date(a.createdAt).getTime()
+      );
+
+      setActivities(allActivities.slice(0, 5));
+    } catch (error) {
+      console.error("Fetch activities error:", error);
+    } finally {
+      setIsFetchingActivities(false);
+    }
+  };
+
+  fetchActivities();
+
+},[projects]);
 
   // Create a new project
   const handleCreateProject = async (event) => {
@@ -132,60 +237,40 @@ function Dashboard({onLogout}) {
   };
 
 
-const myProjects = projects.filter(
-  (project) =>
-    String(project.owner?._id || project.owner) ===
-    localStorage.getItem("userId")
-);
 
-const sharedProjects = projects.filter(
-  (project) =>
-    String(project.owner?._id || project.owner) !==
-    localStorage.getItem("userId")
-);
-
-const filteredMyProjects = myProjects.filter((project) =>
-  project.name.toLowerCase().includes(searchTerm.toLowerCase())
-);
-
-const filteredSharedProjects = sharedProjects.filter((project) =>
-  project.name.toLowerCase().includes(searchTerm.toLowerCase())
-);
 
 
   return (
 
-    
+
     <div className="dashboard">
+
       {/* Sidebar */}
+
       <aside className="sidebar">
-        <h2 className="sidebar-brand">CollabSphere</h2>
+  <h2 className="sidebar-brand">CollabSphere</h2>
 
-        <nav>
-          <a href="#dashboard" className="nav-link active">
-            Dashboard
-          </a>
+  <nav>
+    <button
+      className="nav-link active"
+      onClick={() => navigate("/dashboard")}
+    >
+      Dashboard
+    </button>
 
-          <a href="#projects" className="nav-link">
-            My Projects
-          </a>
+    <button
+      className="nav-link"
+      onClick={() => navigate("/projects")}
+    >
+      My Projects
+    </button>
+  </nav>
 
-          <a href="#notes" className="nav-link">
-            Notes
-          </a>
+  <button className="logout-btn" onClick={handleLogout}>
+    Logout
+  </button>
+</aside>
 
-          <a href="#settings" className="nav-link">
-            Settings
-          </a>
-        </nav>
-
-        <button
-          className="logout-btn"
-          onClick={handleLogout}
-        >
-          Logout
-        </button>
-      </aside>
 
       {/* Main dashboard */}
       <main className="dashboard-main">
@@ -260,56 +345,40 @@ const filteredSharedProjects = sharedProjects.filter((project) =>
         <section className="stats-grid">
           <article className="stat-card">
             <span>My Projects</span>
-            <h2>{projects.length}</h2>
+            <h2>{ownedProjects.length}</h2>
+
           </article>
 
-          <article className="stat-card">
-            <span>Collaborators</span>
-            <h2>0</h2>
-          </article>
+        <article className="stat-card">
+  <span>Collaborators</span>
+  <h2>{collaboratorCount}</h2>
+</article>
 
           <article className="stat-card">
             <span>Shared Notes</span>
-            <h2>0</h2>
+            <h2>{notesCount}</h2>
           </article>
         </section>
 
-
-{/* My Projects */}
-<section className="projects-section" id="projects">
-  <h2>My Projects</h2>
-
-  <input
-    type="text"
-    placeholder="Search projects by name..."
-    value={searchTerm}
-    onChange={(event) => setSearchTerm(event.target.value)}
-  />
+        <section className="projects-section">
+  <h2>Your Projects</h2>
 
   {isFetchingProjects ? (
     <p>Loading projects...</p>
-  ) : filteredMyProjects.length === 0 ? (
+  ) : ownedProjects.length === 0 ? (
     <div className="empty-state">
-      <h3>
-        {myProjects.length === 0
-          ? "No projects yet"
-          : "No matching projects found"}
-      </h3>
-      <p>
-        {myProjects.length === 0
-          ? "Create your first project to get started."
-          : "Try searching with a different project name."}
-      </p>
-
-      {myProjects.length === 0 && (
-        <button onClick={() => setShowProjectForm(true)}>
-          Create a project
-        </button>
-      )}
+      <h3>No projects yet</h3>
+      <p>Create your first project to get started.</p>
+      <button
+        className="create-project-btn"
+        onClick={() => setShowProjectForm(true)}
+      >
+        + Create Project
+      </button>
     </div>
   ) : (
     <div className="project-list">
-      {filteredMyProjects.map((project) => (
+      {ownedProjects.map((project) => (
         <article
           className="stat-card project-card"
           key={project._id}
@@ -332,44 +401,30 @@ const filteredSharedProjects = sharedProjects.filter((project) =>
   )}
 </section>
 
-{/* Shared With Me */}
-<section className="projects-section">
-  <h2>Shared With Me</h2>
+<section className="activity-section">
+  <h2>Recent Activity</h2>
 
-  {isFetchingProjects ? (
-    <p>Loading shared projects...</p>
-  ) : filteredSharedProjects.length === 0 ? (
+  {isFetchingActivities ? (
+    <p>Loading activity...</p>
+  ) : activities.length === 0 ? (
     <div className="empty-state">
-      <h3>
-        {sharedProjects.length === 0
-          ? "No shared projects yet"
-          : "No matching projects found"}
-      </h3>
-      <p>
-        {sharedProjects.length === 0
-          ? "Projects other developers share with you will appear here."
-          : "Try searching with a different project name."}
-      </p>
+      <h3>No recent activity</h3>
+      <p>Project updates will appear here when available.</p>
     </div>
   ) : (
-    <div className="project-list">
-      {filteredSharedProjects.map((project) => (
-        <article
-          className="stat-card project-card"
-          key={project._id}
-          onClick={() => handleProjectClick(project._id)}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(event) => {
-            if (event.key === "Enter" || event.key === " ") {
-              event.preventDefault();
-              handleProjectClick(project._id);
-            }
-          }}
-        >
-          <h3>{project.name}</h3>
-          <p>{project.description}</p>
-          <span>Shared project · View details →</span>
+    <div className="activity-list">
+      {activities.map((activity) => (
+        <article className="activity-item" key={activity._id}>
+          <div className="activity-dot" />
+
+          <div className="activity-content">
+            <p>{activity.description}</p>
+
+            <span>
+              {activity.user?.name || "A team member"} ·{" "}
+              {new Date(activity.createdAt).toLocaleString()}
+            </span>
+          </div>
         </article>
       ))}
     </div>

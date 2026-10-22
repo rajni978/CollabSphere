@@ -1,6 +1,7 @@
 
-import Note from "../models/Note.js";
-import Project from "../models/Project.js";
+import Note from "../models/../models/Note.js";
+import Project from "../../projects/models/Project.js";
+import Activity from "../../activity/models/Activity.js";
 
 export const createNote = async (req, res) => {
   try {
@@ -35,6 +36,13 @@ $or: [
       project: project._id,
       author: req.userId,
     });
+
+    await Activity.create({
+  project: project._id,
+  user: req.userId,
+  action: "note_created",
+  description: `Created note "${note.title}"`,
+});
 
     return res.status(201).json({
       message: "Note saved successfully!",
@@ -131,6 +139,13 @@ export const updateNote = async (req, res) => {
     note.content = content.trim();
 
     await note.save();
+
+    await Activity.create({
+  project: project._id,
+  user: req.userId,
+  action: "note_updated",
+  description: `Updated note "${note.title}"`,
+});
 
     return res.status(200).json({
       message: "Note updated successfully!",

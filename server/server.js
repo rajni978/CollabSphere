@@ -1,11 +1,12 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
-import connectDB from  "./config/db.js";
-import authRoutes from "./routes/authRoutes.js";
-import projectRoutes from "./routes/projectRoutes.js";
-import noteRoutes from "./routes/noteRoutes.js";
-import geminiRoutes from "./routes/geminiRoutes.js";
+import connectDB from  "./src/config/db.js";
+import authRoutes from "./src/modules/auth/routes/authRoutes.js";
+import projectRoutes from "./src/modules/projects/routes/projectRoutes.js";
+import noteRoutes from "./src/modules/notes/routes/noteRoutes.js";
+import geminiRoutes from "./src/modules/ai/routes/geminiRoutes.js";
+import activityRoutes from "./src/modules/activity/routes/activityRoutes.js";
 
 dotenv.config();
 
@@ -21,6 +22,7 @@ app.use("/api/auth",authRoutes);
 app.use("/api/projects",projectRoutes);
 app.use("/api/projects", noteRoutes);
 app.use("/api/gemini", geminiRoutes);
+app.use("/api/projects", activityRoutes);
 
 // Test route
 

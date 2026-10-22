@@ -1,8 +1,11 @@
 
 import { useState } from "react";
 import "./App.css";
-import Dashboard from "./pages/Dashboard";
-import ProjectDetails from "./pages/ProjectDetails";
+import Dashboard from "./features/projects/pages/Dashboard";
+import ProjectDetails from "./features/projects/pages/ProjectDetails";
+import MyProjects from "./features/projects/pages/MyProjects";
+
+
 import {
   BrowserRouter,
   Routes,
@@ -40,7 +43,7 @@ function AuthPage({ onLogin }) {
 
       const data = await response.json();
       console.log("Login response:", data);
-      
+
       if (!response.ok) {
         throw new Error(data.message || "Something went wrong");
       }
@@ -214,6 +217,21 @@ function AppRoutes() {
           )
         }
       />
+
+
+
+<Route
+  path="/projects"
+  element={
+    isAuthenticated ? (
+      <MyProjects onLogout={handleLogout} />
+    ) : (
+      <Navigate to="/" replace />
+    )
+  }
+/>
+
+
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>
   );

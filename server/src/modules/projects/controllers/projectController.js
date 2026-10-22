@@ -1,36 +1,45 @@
 import Project from "../models/Project.js";
-import User from "../models/User.js";
+import User from "../../auth/models/User.js";
+import Note from "../../notes/models/Note.js";
+import Activity from "../../activity/models/Activity.js";
 
-export const createProject = async(req,res)=> {
 
-    try{
 
-        const{name,description} = req.body;
+export const createProject = async (req, res) => {
+  try {
+    const { name, description } = req.body;
 
-        if(!name || !description){
-
-            return res.status(400).json({
-                message:"Project name description are required",
-            });
-        }
-
-        const project = await Project.create({
-            name:name.trim(),
-            description:description.trim(),
-            owner:req.userId,
-
-        });
-        return res.status(201).json({
-            message:"Project created successfully!",
-            project,
-        });
-    }catch(error){
-        console.error("Create project error:",error.message);
-
-        return res.status(500).json({
-            message:"Something went wrong while creating the project.",
-        });
+    if (!name || !description) {
+      return res.status(400).json({
+        message: "Project name description are required",
+      });
     }
+
+    const project = await Project.create({
+      name: name.trim(),
+      description: description.trim(),
+      owner: req.userId,
+    });
+
+    // Record the project creation activity.
+    await Activity.create({
+      project: project._id,
+      user: req.userId,
+      action: "project_created",
+      description: `Created project "${project.name}"`,
+    });
+
+    return res.status(201).json({
+      message: "Project created successfully!",
+      project,
+    });
+  } catch (error) {
+    console.error("Create project error:", error.message);
+
+    return res.status(500).json({
+      message: "Something went wrong while creating the project.",
+    });
+  }
 };
 
 
@@ -236,6 +245,13 @@ export const addProjectMember = async (req, res) => {
     project.members.push(user._id);
     await project.save();
 
+    await Activity.create({
+      project:project._id,
+      user:req.userId,
+      action:"member_added",
+      descriptin:`Added ${user.name} as a project collaborator`,
+    })
+
     return res.status(200).json({
       message: "Project member added successfully!",
       member: {
@@ -255,6 +271,32 @@ export const addProjectMember = async (req, res) => {
 
     return res.status(500).json({
       message: "Failed to add project member.",
+    });
+  }
+};
+
+
+export const getMyNotesCount = async(req,res) => {
+  try{
+    const projects = await Project.find({
+
+      owner:req.userId,
+    }).select("_id");
+
+    const projectIds = projects.map((project) => project._id);
+
+    const count = await Note.countDocuments({
+      project:{$in:projectIds},
+    });
+
+    return res.status(200).json({count});
+
+  }catch(error){
+
+    console.error("Get notes count error:",error);
+
+    return res.status(500).json({
+      message:"Failed to retrieve notes count",
     });
   }
 };
