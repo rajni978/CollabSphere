@@ -6,7 +6,7 @@ Built with React, Node.js, Express, and MongoDB, the project demonstrates full-s
 
 ## Live Demo
 
-- **Frontend:** https://collab-sphere-three-lyart.vercel.app/dashboard.
+- **Frontend:** https://collab-sphere-three-lyart.vercel.app
 - **Backend:** https://collabsphere-f0p9.onrender.com
 - **GitHub Repository:** https://github.com/rajni978/CollabSphere
 
