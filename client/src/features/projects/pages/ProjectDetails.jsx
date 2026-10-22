@@ -1,4 +1,4 @@
-
+import API_URL from "../../../lib/api";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
@@ -55,7 +55,7 @@ const [editContent, setEditContent] = useState("");
         }
 
         const response = await fetch(
-          `http://localhost:5000/api/projects/${id}`,
+          `${API_URL}/api/projects/${id}`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -95,7 +95,7 @@ const [editContent, setEditContent] = useState("");
         }
 
         const response = await fetch(
-          `http://localhost:5000/api/projects/${id}/notes`,
+          `${API_URL}/api/projects/${id}/notes`,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -135,7 +135,7 @@ const [editContent, setEditContent] = useState("");
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://localhost:5000/api/projects/${id}`,
+        `${API_URL}/api/projects/${id}`,
         {
           method: "PUT",
           headers: {
@@ -176,7 +176,7 @@ const [editContent, setEditContent] = useState("");
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://localhost:5000/api/projects/${id}`,
+        `${API_URL}/api/projects/${id}`,
         {
           method: "DELETE",
           headers: {
@@ -209,7 +209,7 @@ const handleAddMember = async (e) => {
     const token = localStorage.getItem("token");
 
     const response = await fetch(
-      `http://localhost:5000/api/projects/${id}/members`,
+      `${API_URL}/api/projects/${id}/members`,
       {
         method: "POST",
         headers: {
@@ -255,7 +255,7 @@ const handleAddMember = async (e) => {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://localhost:5000/api/projects/${id}/notes`,
+        `${API_URL}/api/projects/${id}/notes`,
         {
           method: "POST",
           headers: {
@@ -299,7 +299,7 @@ const handleAddMember = async (e) => {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://localhost:5000/api/projects/notes/${noteId}`,
+        `${API_URL}/api/projects/notes/${noteId}`,
         {
           method: "PUT",
           headers: {
@@ -348,7 +348,7 @@ const handleAddMember = async (e) => {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://localhost:5000/api/projects/notes/${noteId}`,
+        `${API_URL}/api/projects/notes/${noteId}`,
         {
           method: "DELETE",
           headers: {
@@ -392,7 +392,7 @@ const handleAddMember = async (e) => {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        `http://localhost:5000/api/gemini/${action}`,
+        `${API_URL}/api/gemini/${action}`,
         {
           method: "POST",
           headers: {

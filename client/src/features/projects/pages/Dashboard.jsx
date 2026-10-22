@@ -1,4 +1,4 @@
-
+import API_URL from "../../../lib/api";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
@@ -47,7 +47,7 @@ const collaboratorCount = new Set(
         }
 
         const response = await fetch(
-          "http://localhost:5000/api/projects",
+         `${API_URL}/api/projects` ,
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -88,7 +88,7 @@ const collaboratorCount = new Set(
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://localhost:5000/api/projects/notes-count",
+        `${API_URL}/api/projects/notes-count`,
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -132,7 +132,7 @@ useEffect(() => {
       const results = await Promise.all(
         projects.map(async (project) => {
           const response = await fetch(
-            `http://localhost:5000/api/projects/${project._id}/activities`,
+           `${API_URL}/api/projects/${project._id}/activities` ,
             {
               headers: {
                 Authorization: `Bearer ${token}`,
@@ -179,7 +179,7 @@ useEffect(() => {
       const token = localStorage.getItem("token");
 
       const response = await fetch(
-        "http://localhost:5000/api/projects",
+        `${API_URL}/api/projects`,
         {
           method: "POST",
           headers: {

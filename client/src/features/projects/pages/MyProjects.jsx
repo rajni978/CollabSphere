@@ -1,4 +1,5 @@
 
+import API_URL from "../../../lib/api";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./Dashboard.css";
@@ -26,7 +27,7 @@ function MyProjects({ onLogout }) {
           return;
         }
 
-        const response = await fetch("http://localhost:5000/api/projects", {
+        const response = await fetch(`${API_URL}/api/projects`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -87,7 +88,7 @@ console.log("My projects:", myProjects);
     try {
       const token = localStorage.getItem("token");
 
-      const response = await fetch("http://localhost:5000/api/projects", {
+      const response = await fetch(`${API_URL}/api/projects`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

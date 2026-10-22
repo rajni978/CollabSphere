@@ -1,4 +1,4 @@
-
+import API_URL from "./lib/api";
 import { useState } from "react";
 import "./App.css";
 import Dashboard from "./features/projects/pages/Dashboard";
@@ -31,7 +31,7 @@ function AuthPage({ onLogin }) {
     try {
       const endpoint = isLogin ? "login" : "register";
       const response = await fetch(
-        `http://localhost:5000/api/auth/${endpoint}`,
+        `${API_URL}/api/auth/${endpoint}`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
