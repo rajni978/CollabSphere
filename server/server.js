@@ -7,6 +7,7 @@ import projectRoutes from "./src/modules/projects/routes/projectRoutes.js";
 import noteRoutes from "./src/modules/notes/routes/noteRoutes.js";
 import geminiRoutes from "./src/modules/ai/routes/geminiRoutes.js";
 import activityRoutes from "./src/modules/activity/routes/activityRoutes.js";
+import fileRoutes from "./src/modules/files/routes/fileRoutes.js";
 
 dotenv.config();
 
@@ -23,6 +24,7 @@ app.use("/api/projects",projectRoutes);
 app.use("/api/projects", noteRoutes);
 app.use("/api/gemini", geminiRoutes);
 app.use("/api/projects", activityRoutes);
+app.use("/api/files", fileRoutes);
 
 // Test route
 

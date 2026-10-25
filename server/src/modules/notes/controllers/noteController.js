@@ -1,5 +1,5 @@
 
-import Note from "../models/../models/Note.js";
+import Note from "../models/Note.js";
 import Project from "../../projects/models/Project.js";
 import Activity from "../../activity/models/Activity.js";
 

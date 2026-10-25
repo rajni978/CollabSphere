@@ -1,0 +1,39 @@
+
+.file-ai-explanation {
+  margin-top: 16px;
+}
+
+.file-ai-explanation button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #2563eb;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.file-ai-explanation button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+.file-ai-result {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #f9fafb;
+}
+
+.file-ai-result pre {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-family: inherit;
+  line-height: 1.6;
+}
+
+.file-ai-error {
+  color: #b91c1c;
+  margin-top: 10px;
+}

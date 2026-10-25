@@ -1,612 +1,832 @@
+/* ===== Project Details Page ===== */
 
 .project-details-page {
   min-height: 100vh;
-  padding: 40px 24px;
-  background: #f7f7fc;
-  color: #24243a;
+  padding: 36px 24px;
+  background: #f7f8fc;
+  color: #20243a;
   box-sizing: border-box;
 }
 
 .project-details-container {
   width: 100%;
-  max-width: 1000px;
+  max-width: 1050px;
   margin: 0 auto;
 }
 
-.back-button {
+/* Back button */
+
+.project-details-page .back-button {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 24px;
-  padding: 11px 16px;
-  border: 1px solid #e5e3f5;
+  margin-bottom: 26px;
+  padding: 10px 15px;
+  border: 1px solid #e2e5ef;
   border-radius: 10px;
   background: #ffffff;
-  color: #5b54c7;
+  color: #515775;
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s ease, border-color 0.2s ease;
 }
 
-.back-button:hover {
-  background: #f0efff;
-  border-color: #c9c4ff;
+
+.project-details-page .back-button:hover {
+  background: #f0edff;
+  border-color: #c9bfff;
 }
 
-.project-details-card {
-  padding: 36px;
-  border: 1px solid #e9e8f3;
-  border-radius: 20px;
-  background: #ffffff;
-  box-shadow: 0 6px 24px rgba(36, 36, 58, 0.04);
-}
+/* Project header */
 
-.project-details-card h1 {
-  margin: 0 0 16px;
-  color: #24243a;
-  font-size: clamp(26px, 4vw, 34px);
-  font-weight: 750;
-  line-height: 1.3;
-  overflow-wrap: anywhere;
-}
-
-.project-description {
-  margin: 0 0 28px;
-  color: #73738b;
-  font-size: 15px;
-  line-height: 1.8;
-  white-space: pre-wrap;
-  overflow-wrap: anywhere;
-}
-
-.project-created-date {
-  padding-top: 20px;
-  border-top: 1px solid #eeedf5;
-  color: #85849a;
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-@media (max-width: 600px) {
-  .project-details-page {
-    padding: 24px 14px;
-  }
-
-  .project-details-card {
-    padding: 22px 18px;
-    border-radius: 16px;
-  }
-
-  .project-details-card h1 {
-    font-size: 26px;
-  }
-}
-
-
-
-.collaborators-section {
-  margin-top: 28px;
-  padding: 28px;
-  border: 1px solid #e9e8f3;
-  border-radius: 18px;
-  background: #ffffff;
-  box-shadow: 0 4px 18px rgba(36, 36, 58, 0.03);
-}
-
-.collaborators-section h2 {
-  margin: 0 0 10px;
-  color: #24243a;
-  font-size: 21px;
-  font-weight: 700;
-}
-
-.collaborators-section > p {
-  margin: 0 0 18px;
-  color: #77778e;
-  font-size: 14px;
-  line-height: 1.7;
-}
-
-.collaborator-form {
+.project-details-page .workspace-header {
   display: flex;
-  flex-direction: column;
-  gap: 12px;
-  max-width: 480px;
-  margin: 22px 0;
-}
-
-.collaborator-form label {
-  color: #45445d;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.collaborator-form input {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 12px 14px;
-  border: 1px solid #deddec;
-  border-radius: 10px;
-  background: #fcfcff;
-  color: #24243a;
-  font: inherit;
-  font-size: 14px;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.collaborator-form input:focus {
-  outline: none;
-  border-color: #8178ed;
-  box-shadow: 0 0 0 3px rgba(129, 120, 237, 0.12);
-}
-
-.collaborator-form button {
-  align-self: flex-start;
-  padding: 11px 18px;
-  border: none;
-  border-radius: 9px;
-  background: #635bdb;
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.collaborator-form button:hover:not(:disabled) {
-  background: #5148c7;
-  transform: translateY(-1px);
-}
-
-.collaborator-form button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-.collaborators-section h3 {
-  margin: 28px 0 14px;
-  color: #34334d;
-  font-size: 16px;
-  font-weight: 700;
-}
-
-.collaborators-section ul {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.collaborators-section li {
-  min-width: 0;
-  padding: 16px;
-  border: 1px solid #eeedf6;
-  border-radius: 12px;
-  background: #fafaff;
-  overflow-wrap: anywhere;
-}
-
-.collaborators-section li strong {
-  display: inline-block;
-  margin-bottom: 6px;
-  color: #34334d;
-  font-size: 14px;
-}
-
-.collaborators-section li span {
-  color: #77778e;
-  font-size: 13px;
-  line-height: 1.6;
-}
-
-.member-success {
-  color: #15803d;
-  font-size: 14px;
-}
-
-.member-error {
-  color: #b91c1c;
-  font-size: 14px;
-}
-
-@media (max-width: 600px) {
-  .collaborators-section {
-    padding: 20px 16px;
-    border-radius: 15px;
-  }
-
-  .collaborators-section ul {
-    grid-template-columns: 1fr;
-  }
-}
-
-
-
-/* Project Notes section */
-.notes-section {
-  margin-top: 28px;
-  padding: 28px;
-  border: 1px solid #e9e8f3;
-  border-radius: 18px;
-  background: #ffffff;
-  box-shadow: 0 4px 18px rgba(36, 36, 58, 0.03);
-}
-
-.notes-section h2 {
-  margin: 0 0 10px;
-  color: #24243a;
-  font-size: 21px;
-  font-weight: 700;
-}
-
-.notes-section > p {
-  margin: 0 0 20px;
-  color: #77778e;
-  font-size: 14px;
-  line-height: 1.7;
-}
-
-.saved-notes {
-  margin-top: 30px;
-}
-
-.saved-notes h3 {
-  margin-bottom: 18px;
-  color: #34334d;
-  font-size: 17px;
-  font-weight: 700;
-}
-
-/* New note form */
-.note-form {
-  display: flex;
-  flex-direction: column;
-  gap: 11px;
-  margin-top: 22px;
-}
-
-.note-form label {
-  color: #45445d;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.note-form input,
-.note-form textarea {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 13px 14px;
-  border: 1px solid #deddec;
-  border-radius: 10px;
-  background: #fcfcff;
-  color: #24243a;
-  font: inherit;
-  font-size: 14px;
-  line-height: 1.6;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
-}
-
-.note-form input:focus,
-.note-form textarea:focus {
-  outline: none;
-  border-color: #8178ed;
-  box-shadow: 0 0 0 3px rgba(129, 120, 237, 0.12);
-}
-
-.note-form textarea {
-  min-height: 150px;
-  resize: vertical;
-  font-family: inherit;
-}
-
-.note-form button {
-  align-self: flex-start;
-  padding: 11px 19px;
-  border: none;
-  border-radius: 9px;
-  background: #635bdb;
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
-}
-
-.note-form button:hover:not(:disabled) {
-  background: #5148c7;
-  transform: translateY(-1px);
-}
-
-.note-form button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
-/* Saved note cards */
-.note-card {
-  margin-bottom: 18px;
-  padding: 24px;
-  border: 1px solid #e9e8f3;
-  border-radius: 15px;
-  background: #ffffff;
-  box-shadow: 0 3px 12px rgba(36, 36, 58, 0.025);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
-}
-
-.note-card:hover {
-  border-color: #d8d3ff;
-  box-shadow: 0 8px 22px rgba(40, 35, 90, 0.06);
-}
-
-.note-card h4 {
-  margin: 0 0 14px;
-  color: #292840;
-  font-size: 18px;
-  font-weight: 700;
-  line-height: 1.5;
-  overflow-wrap: anywhere;
-}
-
-.note-card small {
-  display: block;
-  margin-bottom: 16px;
-  color: #85849a;
-  font-size: 12px;
-  line-height: 1.6;
-}
-
-.note-meta {
-  display: flex;
-  flex-wrap: wrap;
+  align-items: flex-start;
   justify-content: space-between;
-  gap: 8px 16px;
-  margin: 16px 0;
-  color: #85849a;
-  font-size: 12px;
+  gap: 24px;
+  padding: 30px;
+  margin-bottom: 24px;
+  background: #ffffff;
+  border: 1px solid #e8eaf3;
+  border-radius: 18px;
+  box-shadow: 0 5px 20px rgba(32, 36, 58, 0.04);
 }
 
-/* Gemini AI responses */
-.note-ai-result {
-  margin-top: 16px;
-  padding: 20px;
-  border: 1px solid #dcd8ff;
-  border-radius: 13px;
-  background: #f7f6ff;
-  color: #45445d;
-  font-size: 14px;
-  line-height: 1.8;
+.project-details-page .workspace-title-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  min-width: 0;
+}
+
+.project-details-page .workspace-project-icon {
+  display: flex;
+  flex-shrink: 0;
+  align-items: center;
+  justify-content: center;
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #6d5dfc, #9275ff);
+  color: #ffffff;
+  font-size: 19px;
+  font-weight: 800;
+  box-shadow: 0 5px 14px rgba(109, 93, 252, 0.22);
+}
+
+.project-details-page .workspace-title-content {
+  min-width: 0;
+}
+
+.project-details-page .workspace-breadcrumb {
+  margin: 0 0 10px;
+  color: #858ba4;
+  font-size: 12px;
+  font-weight: 600;
   overflow-wrap: anywhere;
 }
 
-.note-ai-result h5 {
-  margin: 0 0 12px;
-  color: #5148c7;
+.project-details-page .workspace-title-content h1 {
+  margin: 0 0 10px;
+  color: #20243a;
+  font-size: clamp(25px, 3vw, 34px);
+  font-weight: 750;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+.project-details-page .workspace-title-content > p:last-child {
+  margin: 0;
+  max-width: 650px;
+  color: #737992;
   font-size: 15px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.project-details-page .workspace-status {
+  flex-shrink: 0;
+  padding: 8px 13px;
+  border: 1px solid #e0dbff;
+  border-radius: 999px;
+  background: #f3f0ff;
+  color: #6953dc;
+  font-size: 12px;
   font-weight: 700;
 }
 
-.note-ai-result p:last-child {
-  margin-bottom: 0;
+/* Main summary panel */
+
+.project-details-page .workspace-panel {
+  padding: 30px;
+  background: #ffffff;
+  border: 1px solid #e8eaf3;
+  border-radius: 18px;
+  box-shadow: 0 5px 20px rgba(32, 36, 58, 0.04);
 }
 
-/* Feedback messages */
-.note-success {
-  margin-top: 12px;
-  color: #15803d;
+.project-details-page .workspace-section-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 25px;
+}
+
+.project-details-page .workspace-eyebrow {
+  margin: 0 0 9px;
+  color: #7965e8;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+}
+
+.project-details-page .workspace-section-heading h2 {
+  margin: 0 0 8px;
+  color: #252941;
+  font-size: 23px;
+  font-weight: 750;
+}
+
+.project-details-page .workspace-section-heading p:last-child {
+  margin: 0;
+  color: #858ba0;
   font-size: 14px;
+  line-height: 1.6;
 }
 
-.note-error {
-  margin-top: 10px;
-  color: #b91c1c;
+/* Information card */
+
+.project-details-page .workspace-settings-card {
+  padding: 26px;
+  border: 1px solid #e9e7f7;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #ffffff, #fbfaff);
+}
+
+.project-details-page .workspace-settings-card h3 {
+  margin: 0 0 22px;
+  color: #292d45;
+  font-size: 17px;
+  font-weight: 750;
+}
+
+.project-details-page .workspace-settings-card p {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  margin: 0;
+  padding: 16px 0;
+  border-bottom: 1px solid #eeeff5;
+  color: #666d85;
   font-size: 14px;
+  line-height: 1.6;
+  overflow-wrap: anywhere;
 }
 
-@media (max-width: 600px) {
-  .notes-section {
-    padding: 20px 16px;
-    border-radius: 15px;
+.project-details-page .workspace-settings-card p strong {
+  flex-shrink: 0;
+  min-width: 115px;
+  color: #343951;
+  font-weight: 650;
+}
+
+/* Primary action */
+
+.project-details-page .workspace-primary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 25px;
+  padding: 13px 20px;
+  border: none;
+  border-radius: 11px;
+  background: linear-gradient(135deg, #6d5dfc, #8068f7);
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 5px 13px rgba(109, 93, 252, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.project-details-page .workspace-primary-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 18px rgba(109, 93, 252, 0.28);
+}
+
+
+/* Loading and error states */
+
+.project-details-page > p {
+  max-width: 1050px;
+  margin: 30px auto;
+  color: #666d85;
+  line-height: 1.6;
+}
+
+.project-details-page > button {
+  display: block;
+  margin: 16px auto;
+  padding: 11px 16px;
+  border: none;
+  border-radius: 10px;
+  background: #6d5dfc;
+  color: #ffffff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* Tablet and mobile */
+
+@media (max-width: 700px) {
+  .project-details-page {
+    padding: 22px 14px;
   }
 
-  .note-card {
+  .project-details-page .workspace-header {
+    flex-direction: column;
+    padding: 22px;
+  }
+
+  .project-details-page .workspace-status {
+    align-self: flex-start;
+  }
+
+  .project-details-page .workspace-title-row {
+    gap: 13px;
+  }
+
+  .project-details-page .workspace-project-icon {
+    width: 46px;
+    height: 46px;
+    border-radius: 12px;
+    font-size: 16px;
+  }
+
+  .project-details-page .workspace-panel {
+    padding: 22px 18px;
+  }
+
+  .project-details-page .workspace-settings-card {
     padding: 18px;
   }
 
-  .note-ai-result {
-    padding: 15px;
+  .project-details-page .workspace-section-heading h2 {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 420px) {
+  .project-details-page .workspace-title-row {
+    flex-direction: column;
+  }
+
+  .project-details-page .workspace-settings-card p {
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .project-details-page .workspace-settings-card p strong {
+    min-width: 0;
+  }
+
+  .project-details-page .workspace-primary-button {
+    width: 100%;
   }
 }
 
 
+/* =========================================
+   CollabSphere — Workspace UI Enhancement
+   Scoped to the full workspace only
+========================================= */
 
-/* Project action buttons */
-.project-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-  margin-top: 24px;
+.workspace-page {
+  padding: 32px 24px 48px;
+  background: #f5f7fc;
+  color: #20243a;
 }
 
-.project-actions button {
-  padding: 11px 18px;
-  border: 1px solid #dedcf5;
-  border-radius: 9px;
-  background: #f0efff;
-  color: #5148c7;
-  font-size: 14px;
+.workspace-page .project-details-container {
+  max-width: 1240px;
+}
+
+/* Back navigation */
+
+.workspace-page > .project-details-container > .back-button {
+  margin-bottom: 22px;
+  padding: 10px 14px;
+  border: 1px solid #e1e5ef;
+  border-radius: 10px;
+  background: #fff;
+  color: #555c74;
   font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.2s ease;
+  transition: all 0.2s ease;
 }
 
-.project-actions button:hover {
-  background: #e5e2ff;
-  transform: translateY(-1px);
+.workspace-page > .project-details-container > .back-button:hover {
+  border-color: #c9c0ff;
+  background: #f1efff;
+  color: #5b45d6;
 }
 
-.project-actions .delete-project-button {
-  border-color: #fee2e2;
-  background: #fff1f2;
-  color: #be123c;
+/* Workspace header */
+
+.workspace-page .workspace-header {
+  padding: 28px;
+  border: 1px solid #e5e8f2;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #ffffff 65%, #f6f4ff);
+  box-shadow: 0 5px 22px rgba(35, 40, 80, 0.045);
 }
 
-.project-actions .delete-project-button:hover {
-  background: #ffe4e6;
+.workspace-page .workspace-title-row {
+  justify-content: flex-start;
+  align-items: center;
+  gap: 17px;
 }
 
-/* Note editing and AI action buttons */
-.note-actions,
-.note-ai-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  margin-top: 14px;
+.workspace-page .workspace-project-icon {
+  width: 58px;
+  height: 58px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #6758e8, #9580ff);
+  color: #fff;
+  font-size: 20px;
+  box-shadow: 0 5px 14px rgba(103, 88, 232, 0.2);
 }
 
-.note-card button {
+.workspace-page .workspace-breadcrumb {
+  margin: 0 0 8px;
+  color: #858ba2;
+  font-size: 12px;
+}
+
+.workspace-page .workspace-title-content h1 {
+  margin-bottom: 9px;
+  color: #20243a;
+  font-weight: 750;
+  letter-spacing: -0.7px;
+}
+
+.workspace-page .workspace-title-content p {
+  overflow-wrap: anywhere;
+}
+
+.workspace-page .workspace-header-actions {
+  margin-top: 22px;
+  padding-top: 18px;
+  border-top: 1px solid #ebeaf5;
+}
+
+.workspace-page .workspace-header-actions button {
   padding: 9px 14px;
-  border: 1px solid #e1dff2;
-  border-radius: 8px;
-  background: #ffffff;
-  color: #5148c7;
+  border: 1px solid #e1def8;
+  border-radius: 9px;
+  background: #f7f5ff;
+  color: #5848c8;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s ease, border-color 0.2s ease;
+  transition: all 0.2s ease;
 }
 
-.note-card button:hover:not(:disabled) {
-  border-color: #c9c4ff;
-  background: #f5f4ff;
+.workspace-page .workspace-header-actions button:hover {
+  border-color: #c6bdff;
+  background: #eeebff;
 }
 
-.note-card button:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
+.workspace-page .workspace-status {
+  border-color: #ddd7ff;
+  background: #f1eeff;
+  color: #5d49d1;
+}
+
+/* Sharing area */
+
+.workspace-page .workspace-sharing {
+  margin: 18px 0 24px;
+  padding: 18px 20px;
+  border: 1px solid #e6e8f1;
+  border-radius: 14px;
+  background: #fff;
+}
+
+/* Workspace tabs */
+
+.workspace-page .workspace-tabs {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 8px;
+  margin: 0 0 24px;
+  padding: 8px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  border: 1px solid #e7e8f1;
+  border-radius: 13px;
+  background: #fff;
+  box-shadow: 0 3px 12px rgba(35, 40, 80, 0.035);
+  scrollbar-width: thin;
 }
 
 
-/* Edit saved note form fields */
-.note-card > input,
-.note-card > textarea {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-  margin-bottom: 14px;
-  padding: 13px 14px;
-  border: 1px solid #deddec;
-  border-radius: 10px;
-  background: #fcfcff;
-  color: #24243a;
-  font: inherit;
+.workspace-page .workspace-tabs .workspace-tab {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  margin: 0;
+  padding: 11px 15px;
+  appearance: none;
+  border: 1px solid transparent;
+  border-radius: 9px;
+  background: transparent;
+  color: #626980;
+  font-family: inherit;
   font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.workspace-page .workspace-tabs .workspace-tab:hover {
+  background: #f6f4ff;
+  color: #5848c8;
+}
+
+.workspace-page .workspace-tabs .workspace-tab.active {
+  border-color: #e3ddff;
+  background: #f0edff;
+  color: #5946d1;
+  font-weight: 700;
+}
+
+.workspace-page .workspace-tab-count {
+  padding: 3px 7px;
+  border-radius: 6px;
+  background: #e5e0ff;
+  color: #5848c8;
+  font-size: 10px;
+}
+
+
+/* Main content panel */
+
+.workspace-page .workspace-panel {
+  padding: 28px;
+  border: 1px solid #e5e8f1;
+  border-radius: 17px;
+  background: #fff;
+  box-shadow: 0 4px 20px rgba(35, 40, 80, 0.035);
+}
+
+.workspace-page .workspace-section-heading {
+  margin-bottom: 25px;
+}
+
+.workspace-page .workspace-section-heading h2,
+.workspace-page .workspace-section-heading h3 {
+  color: #22263d;
+  font-weight: 750;
+  letter-spacing: -0.4px;
+}
+
+.workspace-page .workspace-eyebrow {
+  color: #6a58df;
+  letter-spacing: 1.4px;
+}
+
+/* Overview cards */
+
+.workspace-page .workspace-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  width: 100%;
+  margin: 24px 0;
+}
+
+.workspace-page .workspace-feature-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+  width: 100%;
+  min-width: 0;
+  min-height: 185px;
+  padding: 22px;
+  appearance: none;
+  border: 1px solid #e7e8f2;
+  border-radius: 14px;
+  background: #fff;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  box-sizing: border-box;
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.workspace-page .workspace-feature-card:hover {
+  transform: translateY(-2px);
+  border-color: #c9c0ff;
+  box-shadow: 0 9px 22px rgba(89, 70, 209, 0.08);
+}
+
+.workspace-page .workspace-feature-card .workspace-feature-icon {
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: #f0edff;
+  color: #6250db;
+}
+
+.workspace-page .workspace-feature-card h3 {
+  width: 100%;
+  margin: 0;
+  color: #252941;
+  font-size: 16px;
+  text-align: left;
+}
+
+.workspace-page .workspace-feature-card p {
+  width: 100%;
+  margin: 0;
+  color: #737a91;
+  font-size: 13px;
   line-height: 1.7;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  text-align: left;
 }
 
-.note-card > input:focus,
-.note-card > textarea:focus {
-  outline: none;
-  border-color: #8178ed;
-  background: #ffffff;
-  box-shadow: 0 0 0 3px rgba(129, 120, 237, 0.12);
+.workspace-page .workspace-feature-card > span:last-child {
+  margin-top: auto;
+  color: #604dd4;
+  font-size: 13px;
+  font-weight: 700;
 }
 
-.note-card > textarea {
-  min-height: 140px;
-  resize: vertical;
+/* Information and quick-action cards */
+
+.workspace-page .workspace-info-card {
+  padding: 23px;
+  border: 1px solid #e7e8f2;
+  border-radius: 14px;
+  background: #fff;
+}
+
+.workspace-page .workspace-info-card h3 {
+  margin-top: 0;
+  color: #282c44;
+}
+
+.workspace-page .workspace-quick-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 10px;
+  background: #fbfaff;
+}
+
+.workspace-page .workspace-quick-actions .workspace-action-button {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  padding: 12px 14px;
+  appearance: none;
+  border: 1px solid #e6e3f5;
+  border-radius: 10px;
+  background: #fff;
+  color: #454b63;
+  font-family: inherit;
+  font-size: 13px;
+  line-height: 1.5;
+  text-align: left;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.workspace-page .workspace-action-button:hover {
+  border-color: #c8c0ff;
+  background: #f3f0ff;
+}
+
+/* Notes, members and collaboration sections */
+
+.workspace-page .notes-section,
+.workspace-page .collaborators-section {
+  margin-top: 20px;
+  padding: 23px;
+  border: 1px solid #e8e9f2;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: none;
+}
+
+.workspace-page .note-card,
+.workspace-page .collaborators-section li {
+  border-color: #e7e9f2;
+  border-radius: 13px;
+  background: #fcfcff;
+}
+
+.workspace-page .note-card:hover {
+  border-color: #d4ceff;
+}
+
+.workspace-page .markdown-content {
+  overflow-wrap: anywhere;
+  line-height: 1.8;
+}
+
+.workspace-page .markdown-content pre {
+  max-width: 100%;
+  overflow-x: auto;
+  padding: 14px;
+  border-radius: 9px;
+  background: #f3f4fa;
+}
+
+.workspace-page .markdown-content img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Forms and inputs */
+
+.workspace-page input,
+.workspace-page textarea {
+  max-width: 100%;
+}
+
+.workspace-page .note-form input,
+.workspace-page .note-form textarea,
+.workspace-page .collaborator-form input,
+.workspace-page .edit-project-form input,
+.workspace-page .edit-project-form textarea {
+  border-color: #dfe3ee;
+  border-radius: 10px;
+  background: #fff;
+}
+
+.workspace-page .note-form input:focus,
+.workspace-page .note-form textarea:focus,
+.workspace-page .collaborator-form input:focus,
+.workspace-page .edit-project-form input:focus,
+.workspace-page .edit-project-form textarea:focus {
+  border-color: #8c7cf0;
+  box-shadow: 0 0 0 3px rgba(108, 88, 224, 0.11);
+}
+
+/* AI assistant */
+
+.workspace-page .workspace-ai-card {
+  padding: 28px;
+  border: 1px solid #e0d9ff;
+  border-radius: 16px;
+  background: linear-gradient(145deg, #fff, #f7f4ff);
+}
+
+.workspace-page .workspace-ai-icon {
+  background: #ebe6ff;
+  color: #624bd8;
+}
+
+.workspace-page .workspace-ai-card h3 {
+  color: #30265f;
+}
+
+.workspace-page .workspace-readme-result {
+  border-color: #e3e5f0;
+  border-radius: 13px;
+}
+
+/* Settings */
+
+.workspace-page .workspace-settings-card {
+  padding: 24px;
+  border-color: #e5e8f1;
+  border-radius: 14px;
+  background: #fcfcff;
+}
+
+.workspace-page .workspace-settings-card p {
+  color: #626b82;
+  line-height: 1.8;
+  overflow-wrap: anywhere;
+}
+
+.workspace-page .delete-project-button {
+  border-color: #f1cbd0;
+  background: #fff2f3;
+  color: #bd3549;
+}
+
+.workspace-page .delete-project-button:hover {
+  background: #ffe5e8;
+}
+
+/* Keyboard focus and disabled states */
+
+.workspace-page button {
   font-family: inherit;
 }
 
-.note-card > input::placeholder,
-.note-card > textarea::placeholder {
-  color: #a09fb2;
+.workspace-page button:focus-visible {
+  outline: 3px solid #c9c0ff;
+  outline-offset: 3px;
 }
 
-@media (max-width: 600px) {
-  .note-card > input,
-  .note-card > textarea {
-    padding: 11px 12px;
+
+.workspace-page button:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+}
+
+/* Responsive workspace */
+
+@media (max-width: 760px) {
+  .workspace-page {
+    padding: 20px 14px 32px;
   }
 
-  .note-card > textarea {
-    min-height: 120px;
-  }
-}
-
-
-/* Edit project form */
-.edit-project-form {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  margin-bottom: 28px;
-  padding: 28px;
-  border: 1px solid #e9e8f3;
-  border-radius: 18px;
-  background: #ffffff;
-}
-
-.edit-project-form label {
-  color: #45445d;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.edit-project-form input,
-.edit-project-form textarea {
-  width: 100%;
-  box-sizing: border-box;
-  padding: 12px 14px;
-  border: 1px solid #deddec;
-  border-radius: 10px;
-  background: #fcfcff;
-  color: #24243a;
-  font: inherit;
-  font-size: 14px;
-}
-
-.edit-project-form input:focus,
-.edit-project-form textarea:focus {
-  outline: none;
-  border-color: #8178ed;
-  box-shadow: 0 0 0 3px rgba(129, 120, 237, 0.12);
-}
-
-.edit-project-form button {
-  align-self: flex-start;
-  padding: 11px 18px;
-  border: none;
-  border-radius: 9px;
-  background: #635bdb;
-  color: #ffffff;
-  font-size: 14px;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-.edit-project-form button[type="button"] {
-  border: 1px solid #deddec;
-  background: #ffffff;
-  color: #5148c7;
-}
-
-@media (max-width: 600px) {
-  .project-actions,
-  .note-actions,
-  .note-ai-actions {
-    gap: 8px;
-  }
-
-  .project-actions button,
-  .note-card button {
-    max-width: 100%;
-  }
-
-  .edit-project-form {
+  .workspace-page .workspace-header,
+  .workspace-page .workspace-panel {
     padding: 20px 16px;
   }
+
+  .workspace-page .workspace-header-actions {
+    align-items: flex-start;
+  }
+
+  .workspace-page .workspace-sharing {
+    padding: 14px;
+  }
+
+  .workspace-page .workspace-tabs {
+    margin-right: -2px;
+  }
+
+  .workspace-page .workspace-overview-grid,
+  .workspace-page .workspace-overview-bottom {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .workspace-page .workspace-tabs {
+    gap: 6px;
+    padding: 6px;
+  }
+
+  .workspace-page .workspace-tabs .workspace-tab {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .workspace-page .notes-section,
+  .workspace-page .collaborators-section {
+    padding: 17px 14px;
+  }
+
+  .workspace-page .workspace-feature-card {
+    padding: 19px;
+  }
+
+  .workspace-page .workspace-ai-card,
+  .workspace-page .workspace-settings-card {
+    padding: 19px;
+  }
 }
+
+@media (max-width: 420px) {
+  .workspace-page .workspace-title-row {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .workspace-page .workspace-title-content {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .workspace-page .workspace-header-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .workspace-page .workspace-header-actions button {
+    width: 100%;
+  }
+}
+
+

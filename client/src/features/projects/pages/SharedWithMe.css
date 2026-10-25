@@ -1,0 +1,179 @@
+
+.shared-with-me-main {
+  min-width: 0;
+}
+
+.shared-with-me-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.shared-with-me-eyebrow {
+  margin: 0 0 8px;
+  color: #6d63df;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+}
+
+.shared-with-me-header h1 {
+  margin: 0 0 8px;
+  color: #172033;
+  font-size: 30px;
+  font-weight: 750;
+}
+
+.shared-with-me-header > div > p:last-child {
+  margin: 0;
+  color: #778198;
+  font-size: 14px;
+}
+
+.shared-with-me-count {
+  flex-shrink: 0;
+  padding: 9px 13px;
+  border: 1px solid #e2e6f0;
+  border-radius: 10px;
+  background: #fff;
+  color: #4b556b;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.shared-with-me-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 20px;
+}
+
+.shared-with-me-card {
+  min-width: 0;
+  padding: 22px;
+  border: 1px solid #e5e9f2;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 5px 18px rgb(27 39 74 / 4%);
+}
+
+.shared-with-me-card-top,
+.shared-with-me-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.shared-with-me-project-icon,
+.shared-with-me-empty-icon {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: #eeecff;
+  color: #6658df;
+  font-size: 22px;
+}
+
+.shared-with-me-badge {
+  padding: 5px 9px;
+  border-radius: 20px;
+  background: #e9f8f0;
+  color: #23784c;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.shared-with-me-card h2 {
+  margin: 20px 0 8px;
+  color: #202a40;
+  font-size: 18px;
+}
+
+.shared-with-me-description {
+  min-height: 42px;
+  margin: 0 0 22px;
+  color: #768197;
+  font-size: 13px;
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+.shared-with-me-card-footer {
+  padding-top: 15px;
+  border-top: 1px solid #edf0f5;
+}
+
+.shared-with-me-card-footer span {
+  color: #929bad;
+  font-size: 11px;
+}
+
+.shared-with-me-card-footer button,
+.shared-with-me-empty button {
+  border: 0;
+  border-radius: 8px;
+  padding: 9px 12px;
+  background: #5d50dd;
+  color: white;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.shared-with-me-card-footer button:hover,
+.shared-with-me-empty button:hover {
+  background: #493bc7;
+}
+
+.shared-with-me-message {
+  color: #68758b;
+}
+
+.shared-with-me-error {
+  color: #b42335;
+}
+
+.shared-with-me-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 64px 24px;
+  border: 1px dashed #d9deeb;
+  border-radius: 16px;
+  background: #fff;
+  text-align: center;
+}
+
+.shared-with-me-empty h2 {
+  margin: 18px 0 8px;
+  color: #202a40;
+  font-size: 19px;
+}
+
+.shared-with-me-empty p {
+  max-width: 390px;
+  margin: 0 0 20px;
+  color: #778198;
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+  .shared-with-me-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .shared-with-me-header h1 {
+    font-size: 25px;
+  }
+
+  .shared-with-me-card-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}

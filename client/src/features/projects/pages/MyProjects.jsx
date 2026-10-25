@@ -2,6 +2,7 @@
 import API_URL from "../../../lib/api";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import AppSidebar from "../components/AppSidebar";
 import "./Dashboard.css";
 
 function MyProjects({ onLogout }) {
@@ -66,17 +67,11 @@ function MyProjects({ onLogout }) {
 console.log("Logged-in user ID:", userId);
 console.log("My projects:", myProjects);
 
-  const sharedProjects = projects.filter(
-    (project) => String(project.owner?._id || project.owner) !== userId
-  );
+
 
   const normalizedSearch = searchTerm.trim().toLowerCase();
 
   const filteredMyProjects = myProjects.filter((project) =>
-    project.name?.toLowerCase().includes(normalizedSearch)
-  );
-
-  const filteredSharedProjects = sharedProjects.filter((project) =>
     project.name?.toLowerCase().includes(normalizedSearch)
   );
 
@@ -133,35 +128,15 @@ console.log("My projects:", myProjects);
 
   return (
     <div className="dashboard">
-      <aside className="sidebar">
-        <h2 className="sidebar-brand">CollabSphere</h2>
+   
 
-        <nav>
-          <button
-            className="nav-link"
-            onClick={() => navigate("/dashboard")}
-          >
-            Dashboard
-          </button>
-
-          <button
-            className="nav-link active"
-            onClick={() => navigate("/projects")}
-          >
-            My Projects
-          </button>
-        </nav>
-
-        <button className="logout-btn" onClick={handleLogout}>
-          Logout
-        </button>
-      </aside>
+<AppSidebar active="My Projects" onLogout={handleLogout} />
 
       <main className="dashboard-main">
         <header className="dashboard-header">
           <div>
             <h1>My Projects</h1>
-            <p>Manage your projects and collaborate with others.</p>
+           <p>Manage your projects, track progress, and organize your work.</p>
           </div>
 
           <button
@@ -241,55 +216,30 @@ console.log("My projects:", myProjects);
           ) : (
             <div className="project-list">
               {filteredMyProjects.map((project) => (
-                <article
-                  className="stat-card project-card"
-                  key={project._id}
-                  onClick={() => handleProjectClick(project._id)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(event) => {
-                    if (event.key === "Enter" || event.key === " ") {
-                      event.preventDefault();
-                      handleProjectClick(project._id);
-                    }
-                  }}
-                >
-                  <h3>{project.name}</h3>
-                  <p>{project.description}</p>
-                  <span>View details →</span>
-                </article>
-              ))}
-            </div>
-          )}
-        </section>
+             
+<article className="stat-card project-card" key={project._id}>
+  <h3>{project.name}</h3>
+  <p>{project.description || "No description provided."}</p>
 
-        <section className="projects-section">
-          <h2>Shared With Me ({sharedProjects.length})</h2>
+  <div className="project-card-actions">
+    <button
+      type="button"
+      onClick={() => navigate(`/projects/${project._id}`)}
+    >
+      View Details
+    </button>
 
-          {isFetchingProjects ? (
-            <p>Loading shared projects...</p>
-          ) : filteredSharedProjects.length === 0 ? (
-            <p>No shared projects found.</p>
-          ) : (
-            <div className="project-list">
-              {filteredSharedProjects.map((project) => (
-                <article
-                  className="stat-card project-card"
-                  key={project._id}
-                  onClick={() => handleProjectClick(project._id)}
-                  role="button"
-                  tabIndex={0}
-                  onKeyDown={(event) => {
-                    if (event.key === "Enter" || event.key === " ") {
-                      event.preventDefault();
-                      handleProjectClick(project._id);
-                    }
-                  }}
-                >
-                  <h3>{project.name}</h3>
-                  <p>{project.description}</p>
-                  <span>View details →</span>
-                </article>
+    <button
+      type="button"
+      onClick={() =>
+        navigate(`/projects/${project._id}/workspace`)
+      }
+    >
+      Open Workspace →
+    </button>
+  </div>
+</article>
+
               ))}
             </div>
           )}

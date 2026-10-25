@@ -1,8 +1,10 @@
 
 import express from "express";
 import authMiddleware from "../../../middleware/authMiddleware.js";
-import { getProjectActivities } from "../controllers/activityController.js";
-
+import {
+  getProjectActivities,
+  getProjectContributionAnalytics,
+} from "../controllers/activityController.js";
 
 const router = express.Router();
 
@@ -12,4 +14,12 @@ router.get(
   getProjectActivities
 );
 
+router.get(
+  "/:projectId/analytics",
+  authMiddleware,
+  getProjectContributionAnalytics
+);
+
 export default router;
+
+

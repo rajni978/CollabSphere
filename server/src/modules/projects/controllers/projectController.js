@@ -1,3 +1,4 @@
+import crypto from "crypto";
 import Project from "../models/Project.js";
 import User from "../../auth/models/User.js";
 import Note from "../../notes/models/Note.js";
@@ -249,7 +250,7 @@ export const addProjectMember = async (req, res) => {
       project:project._id,
       user:req.userId,
       action:"member_added",
-      descriptin:`Added ${user.name} as a project collaborator`,
+      description:`Added ${user.name} as a project collaborator`,
     })
 
     return res.status(200).json({
@@ -300,4 +301,96 @@ export const getMyNotesCount = async(req,res) => {
     });
   }
 };
+
+
+export const enableProjectSharing = async (req, res) => {
+  try {
+    const project = await Project.findOne({
+      _id: req.params.id,
+      owner: req.userId,
+    });
+
+    if (!project) {
+      return res.status(404).json({
+        message: "Project not found or you are not the owner.",
+      });
+    }
+
+    if (!project.shareToken) {
+      project.shareToken = crypto.randomBytes(24).toString("hex");
+    }
+
+    project.isPublic = true;
+    await project.save();
+
+    return res.status(200).json({
+      message: "Public sharing enabled.",
+      shareToken: project.shareToken,
+    });
+  } catch (error) {
+    if (error.name === "CastError") {
+      return res.status(400).json({ message: "Invalid project ID." });
+    }
+
+    console.error("Enable sharing error:", error.message);
+    return res.status(500).json({
+      message: "Failed to enable public sharing.",
+    });
+  }
+};
+
+export const disableProjectSharing = async (req, res) => {
+  try {
+    const project = await Project.findOne({
+      _id: req.params.id,
+      owner: req.userId,
+    });
+
+    if (!project) {
+      return res.status(404).json({
+        message: "Project not found or you are not the owner.",
+      });
+    }
+
+    project.isPublic = false;
+    project.shareToken = undefined;
+    await project.save();
+
+    return res.status(200).json({
+      message: "Public sharing disabled.",
+    });
+  } catch (error) {
+    if (error.name === "CastError") {
+      return res.status(400).json({ message: "Invalid project ID." });
+    }
+
+    console.error("Disable sharing error:", error.message);
+    return res.status(500).json({
+      message: "Failed to disable public sharing.",
+    });
+  }
+};
+
+export const getPublicProject = async (req, res) => {
+  try {
+    const project = await Project.findOne({
+      shareToken: req.params.shareToken,
+      isPublic: true,
+    }).select("name description createdAt");
+
+    if (!project) {
+      return res.status(404).json({
+        message: "Shared project not found or sharing has been disabled.",
+      });
+    }
+
+    return res.status(200).json({ project });
+  } catch (error) {
+    console.error("Get public project error:", error.message);
+    return res.status(500).json({
+      message: "Failed to fetch shared project.",
+    });
+  }
+};
+
 

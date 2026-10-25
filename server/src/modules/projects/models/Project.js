@@ -19,13 +19,23 @@ const projectSchema = new mongoose.Schema(
             required:true
         },
     
+members: [
+  {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "User",
+  },
+],
 
-    members:[
-        {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"User",
-        },
-    ],
+isPublic: {
+  type: Boolean,
+  default: false,
+},
+
+shareToken: {
+  type: String,
+  unique: true,
+  sparse: true,
+},
 },
      {
             timestamps:true
